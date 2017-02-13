@@ -6,35 +6,36 @@
 	<string>MFMailComposeViewController</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
+		<string>CodeBlock</string>
 		<string>ClassImplementation</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>    //MARK: MFMailComposeViewController
-
+	<string>    // MARK: MFMailComposeViewController
+    
     func presentModalMailComposerViewController(animated: Bool) {
-        if MFMailComposeViewController.canSendMail() {
-            let mailComposeVC = MFMailComposeViewController()
-            mailComposeVC.delegate = self
-
-            mailComposeVC.setSubject(&lt;#subject#&gt;)
-            mailComposeVC.setMessageBody(&lt;#body#&gt;, isHTML: true)
-            mailComposeVC.setToRecipients([&lt;#recipients#&gt;])
-
-            present(mailComposeVC, animated: animated, completion: nil)
-        } else {
-            UIAlertView(title: NSLocalizedString("Error", value: "Error", comment: ""), message: NSLocalizedString("Your device doesn't support Mail messaging", value: "Your device doesn't support Mail messaging", comment: ""), delegate: nil, cancelButtonTitle: NSLocalizedString("OK", value: "OK", comment: "")).show()
+        guard MFMailComposeViewController.canSendMail() else {
+            &lt;#can't send emails#&gt;
+            return
         }
+        
+        let composeVC = MFMailComposeViewController()
+        composeVC.mailComposeDelegate = self
+        composeVC.setToRecipients(&lt;#recipients#&gt;)
+        composeVC.setSubject(&lt;#subject#&gt;)
+        composeVC.setMessageBody(&lt;#body#&gt;, isHTML: false)
+        
+        composeVC.navigationBar.tintColor = &lt;#color#&gt;
+        composeVC.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : &lt;#color#&gt;]
+        present(composeVC, animated: true, completion: nil)
     }
-
-    //MARK: MFMailComposeViewControllerDelegate
-
-    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
-
-        if error != nil {
-            print("Error: \(error)")
+    
+    // MARK: MFMailComposeViewControllerDelegate
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        if result == .failed {
+            &lt;#error#&gt;
         }
-
-        dismiss(animated: true)
+        controller.dismiss(animated: true, completion: nil)
     }</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>449FB7DE-54FE-4AFA-94AB-F7401AB5A5C8</string>
