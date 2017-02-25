@@ -10,7 +10,7 @@
 	</array>
 	<key>IDECodeSnippetContents</key>
 	<string>DispatchQueue.main.async(execute: { () -&gt; Void in
-    
+    &lt;#code#&gt;
 })</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>E8847AF3-D9A6-40C6-9DC1-981DD1A1042A</string>
